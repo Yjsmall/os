@@ -1,0 +1,7 @@
+drwxr-xr-x    2 0        0            4096 Feb 28 00:49 .
+drwxr-xr-x    9 0        0            4096 Feb 28 00:49 ..
+-rw-r--r--    1 0        0             164 Feb 28 00:49 Makefile
+-rw-r--r--    1 0        0             536 Feb 28 00:49 README.md
+-rw-r--r--    1 0        0             908 Feb 28 00:49 logisim.c
+-rw-r--r--    1 0        0            1601 Feb 28 00:49 logisim.h
+-rw-r--r--    1 0        0             958 Feb 28 00:49 seg-display.py

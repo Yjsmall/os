@@ -1,0 +1,7 @@
+drwxr-xr-x    3 0        0            4096 Feb 28 00:49 .
+drwxr-xr-x    9 0        0            4096 Feb 28 00:49 ..
+-rw-r--r--    1 0        0              96 Feb 28 00:49 Makefile
+-rw-r--r--    1 0        0             376 Feb 28 00:49 README.md
+drwxr-xr-x    2 0        0            4096 Feb 28 00:49 bin
+-rw-r--r--    1 0        0            4948 Feb 28 00:49 main.c
+-rw-r--r--    1 0        0           19423 Feb 28 00:49 mini-rv32ima.h

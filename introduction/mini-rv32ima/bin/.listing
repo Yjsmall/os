@@ -1,0 +1,8 @@
+drwxr-xr-x    2 0        0            4096 Feb 28 00:49 .
+drwxr-xr-x    3 0        0            4096 Feb 28 00:49 ..
+-rw-r--r--    1 0        0              32 Feb 28 00:49 empty.rv32i-bin
+-rw-r--r--    1 0        0             208 Feb 28 00:49 fib.rv32i-bin
+-rw-r--r--    1 0        0             104 Feb 28 00:49 foo.rv32i-bin
+-rw-r--r--    1 0        0             108 Feb 28 00:49 hello.rv32i-bin
+-rw-r--r--    1 0        0             136 Feb 28 00:49 lowbit.rv32i-bin
+-rw-r--r--    1 0        0             124 Feb 28 00:49 rabbit-chicken.rv32i-bin
