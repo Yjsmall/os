@@ -1,5 +1,5 @@
 logisim: logisim.c
-	gcc -o logisim -I. logisim.c
+	gcc -g -o logisim -I. logisim.c
 
 run: logisim
 	./logisim | python3 seg-display.py  # The UNIX Philosophy
