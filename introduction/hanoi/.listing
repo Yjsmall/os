@@ -1,0 +1,7 @@
+drwxr-xr-x    2 0        0            4096 Feb 29 01:21 .
+drwxr-xr-x    9 0        0            4096 Feb 29 01:21 ..
+-rw-r--r--    1 0        0             156 Feb 29 01:21 Makefile
+-rw-r--r--    1 0        0             791 Feb 29 01:21 README.md
+-rw-r--r--    1 0        0             310 Feb 29 01:21 hanoi-main.c
+-rw-r--r--    1 0        0            2078 Feb 29 01:21 hanoi-nr.c
+-rw-r--r--    1 0        0             319 Feb 29 01:21 hanoi-r.c

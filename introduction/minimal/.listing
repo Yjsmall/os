@@ -1,0 +1,6 @@
+drwxr-xr-x    2 0        0            4096 Feb 29 01:21 .
+drwxr-xr-x    9 0        0            4096 Feb 29 01:21 ..
+-rw-r--r--    1 0        0            1218 Feb 29 01:21 Makefile
+-rw-r--r--    1 0        0             560 Feb 29 01:21 README.md
+-rw-r--r--    1 0        0             568 Feb 29 01:21 hello.c
+-rw-r--r--    1 0        0             622 Feb 29 01:21 minimal.S

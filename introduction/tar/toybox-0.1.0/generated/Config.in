@@ -1,0 +1,754 @@
+# toys/basename.c
+config BASENAME
+	bool "basename"
+	default y
+	help
+	  usage: basename path [suffix]
+
+	  Print the part of path after the last slash, optionally minus suffix.
+
+# toys/bzcat.c
+config BZCAT
+	bool "bzcat"
+	default y
+	help
+	  usage: bzcat [filename...]
+
+	  Decompress listed files to stdout.  Use stdin if no files listed.
+
+# toys/cat.c
+config CAT
+	bool "cat"
+	default y
+	help
+	  usage: cat [-u] [file...]
+	  Copy (concatenate) files to stdout.  If no files listed, copy from stdin.
+	  Filename "-" is a synonym for stdin.
+
+	  -u	Copy one byte at a time (slow).
+
+# toys/catv.c
+config CATV
+	bool "catv"
+	default y
+	help
+	  usage: catv [-evt] [filename...]
+
+	  Display nonprinting characters as escape sequences.  Use M-x for
+	  high ascii characters (>127), and ^x for other nonprinting chars.
+
+	  -e	Mark each newline with $
+	  -t	Show tabs as ^I
+	  -v	Don't use ^x or M-x escapes.
+
+# toys/chroot.c
+config CHROOT
+	bool "chroot"
+	default y
+	help
+	  usage: chroot NEWPATH [commandline...]
+
+	  Run command within a new root directory.  If no command, run /bin/sh.
+
+# toys/chvt.c
+config CHVT
+	bool "chvt"
+	default y
+	help
+	  usage: chvt N
+
+	  Change to virtual terminal number N.  (This only works in text mode.)
+
+	  Virtual terminals are the Linux VGA text mode displays, ordinarily
+	  switched between via alt-F1, alt-F2, etc.  Use ctrl-alt-F1 to switch
+	  from X to a virtual terminal, and alt-F6 (or F7, or F8) to get back.
+
+# toys/cksum.c
+config CKSUM
+	bool "cksum"
+	default y
+	help
+	  usage: cksum [-FL] [file...]
+
+	  For each file, output crc32 checksum value, length and name of file.
+	  If no files listed, copy from stdin.  Filename "-" is a synonym for stdin.
+
+	  -L	Little endian (defaults to big endian)
+	  -P	Pre-inversion
+	  -I	Skip post-inversion
+	  -N	No length
+
+# toys/count.c
+config COUNT
+	bool "count"
+	default y
+	help
+	  usage: count
+
+	  Copy stdin to stdout, displaying simple progress indicator to stderr.
+
+# toys/cp.c
+config CP
+	bool "cp"
+	default y
+	help
+	  usage: cp -fiprdal SOURCE... DEST
+
+	  Copy files from SOURCE to DEST.  If more than one SOURCE, DEST must
+	  be a directory.
+
+		-f	force copy by deleting destination file
+		-i	interactive, prompt before overwriting existing DEST
+		-p	preserve timestamps, ownership, and permissions
+		-r	recurse into subdirectories (DEST must be a directory)
+		-d	don't dereference symlinks
+		-a	same as -dpr
+		-l	hard link instead of copying
+		-v	verbose
+
+# toys/df.c
+config DF
+	bool "df (disk free)"
+	default y
+	help
+	  usage: df [-t type] [FILESYSTEM ...]
+
+	  The "disk free" command, df shows total/used/available disk space for
+	  each filesystem listed on the command line, or all currently mounted
+	  filesystems.
+
+	  -t type
+		Display only filesystems of this type.
+
+config DF_PEDANTIC
+	bool "options -P and -k"
+	default y
+	depends on DF
+	help
+	  usage: df [-Pk]
+
+	  -P	The SUSv3 "Pedantic" option
+
+		Provides a slightly less useful output format dictated by
+		the Single Unix Specification version 3, and sets the
+		units to 512 bytes instead of the default 1024 bytes.
+
+	  -k	Sets units back to 1024 bytes (the default without -P)
+
+# toys/dirname.c
+config DIRNAME
+	bool "dirname"
+	default y
+	help
+	  usage: dirname path
+
+	  Print the part of path up to the last slash.
+
+# toys/dmesg.c
+config DMESG
+	bool "dmesg"
+	default y
+	help
+	  usage: dmesg [-n level] [-s bufsize] | -c
+
+	  Print or control the kernel ring buffer.
+
+	  -n	Set kernel logging level (1-9).
+	  -s	Size of buffer to read (in bytes), default 16384.
+	  -c	Clear the ring buffer after printing.
+
+# toys/echo.c
+config ECHO
+	bool "echo"
+	default y
+	help
+	  usage: echo [-ne] [args...]
+
+	  Write each argument to stdout, with one space between each, followed
+	  by a newline.
+
+	  -n	No trailing newline.
+	  -e	Process the following escape sequences:
+	  	\\	backslash
+	  	\a	alert (beep/flash)
+	  	\b	backspace
+	  	\c	Stop output here (avoids trailing newline)
+	  	\f	form feed
+	  	\n	newline
+	  	\r	carriage return
+	  	\t	horizontal tab
+	  	\v	vertical tab
+
+# toys/false.c
+config FALSE
+	bool "false"
+	default y
+	help
+	  Return nonzero.
+
+# toys/hello.c
+config HELLO
+	bool "hello"
+	default n
+	help
+	  A hello world program.  You don't need this.
+
+	  Mostly used as an example/skeleton file for adding new commands,
+	  occasionally nice to test kernel booting via "init=/bin/hello".
+
+# toys/help.c
+config HELP
+	bool "help"
+	default y
+	help
+	  usage: help [command]
+
+	  Show usage information for toybox commands.
+
+config HELP_LONG
+	bool "Verbose help text"
+	default y
+	depends on HELP
+	help
+	  Show more than one line of help information per command.
+
+# toys/mdev.c
+config MDEV
+	bool "mdev"
+	default y
+	help
+	  usage: mdev [-s]
+
+	  Create devices in /dev using information from /sys.
+
+	  -s	Scan all entries in /sys to populate /dev.
+
+config MDEV_CONF
+	bool "Configuration file for mdev"
+	default y
+	depends on MDEV
+	help
+	  The mdev config file (/etc/mdev.conf) contains lines that look like:
+		hd[a-z][0-9]* 0:3 660
+
+	  Each line must contain three whitespace separated fields.  The first
+	  field is a regular expression matching one or more device names, and
+	  the second and third fields are uid:gid and file permissions for
+	  matching devies.
+
+# toys/mke2fs.c
+config MKE2FS
+	bool "mke2fs"
+	default n
+	help
+	  usage: mke2fs [-Fnq] [-b ###] [-N|i ###] [-m ###] device
+
+	  Create an ext2 filesystem on a block device or filesystem image.
+
+	  -F         Force to run on a mounted device
+	  -n         Don't write to device
+	  -q         Quiet (no output)
+	  -b size    Block size (1024, 2048, or 4096)
+	  -N inodes  Allocate this many inodes
+	  -i bytes   Allocate one inode for every XXX bytes of device
+	  -m percent Reserve this percent of filesystem space for root user
+
+config MKE2FS_JOURNAL
+	bool "Journaling support (ext3)"
+	default n
+	depends on MKE2FS
+	help
+	  usage: [-j] [-J size=###,device=XXX]
+
+	  -j         Create journal (ext3)
+	  -J         Journal options
+	             size: Number of blocks (1024-102400)
+	             device: Specify an external journal
+
+config MKE2FS_GEN
+	bool "Generate (gene2fs)"
+	default n
+	depends on MKE2FS
+	help
+	  usage: gene2fs [options] device filename
+
+	  The [options] are the same as mke2fs.
+
+config MKE2FS_LABEL
+	bool "Label support"
+	default n
+	depends on MKE2FS
+	help
+	  usage: mke2fs [-L label] [-M path] [-o string]
+
+	  -L         Volume label
+	  -M         Path to mount point
+	  -o         Created by
+
+config MKE2FS_EXTENDED
+	bool "Extended options"
+	default n
+	depends on MKE2FS
+	help
+	  usage: mke2fs [-E stride=###] [-O option[,option]]
+
+	  -E stride= Set RAID stripe size (in blocks)
+	  -O [opts]  Specify fewer ext2 option flags (for old kernels)
+	             All of these are on by default (as appropriate)
+	     none         Clear default options (all but journaling)
+	     dir_index    Use htree indexes for large directories
+	     filetype     Store file type info in directory entry
+	     has_journal  Set by -j
+	     journal_dev  Set by -J device=XXX
+	     sparse_super Don't allocate huge numbers of redundant superblocks
+
+# toys/mkfifo.c
+config MKFIFO
+	bool "mkfifo"
+	default y
+	help
+	  usage: mkfifo [-m mode] name...
+
+	  Makes a named pipe at name.
+
+	  -m mode	The mode of the pipe(s) created by mkfifo. It defaults
+			to 0644.  This number is in octal, optionally preceded
+			by a leading zero.
+
+# toys/mkswap.c
+config MKSWAP
+	bool "mkswap"
+	default y
+	help
+	  usage: mkswap DEVICE
+
+	  Format a Linux v1 swap device.
+
+# toys/netcat.c
+config NETCAT
+	bool "netcat"
+	default y
+	help
+	  usage: netcat [-wpq #] [-s addr] {IPADDR PORTNUM|-f FILENAME|-let} [-e COMMAND]
+
+	  -w	SECONDS timeout for connection
+	  -p	local port number
+	  -s	local ipv4 address
+	  -q	SECONDS quit this many seconds after EOF on stdin.
+	  -f	use FILENAME (ala /dev/ttyS0) instead of network
+
+	  Use "stty 115200 -F /dev/ttyS0 && stty raw -echo -ctlecho" with
+	  netcat -f to connect to a serial port.
+
+
+config NETCAT_LISTEN
+	bool "netcat sever options (-let)"
+	default y
+	depends on NETCAT
+	help
+	  -t    allocate tty (must come before -l or -L)
+	  -l	listen for one incoming connection.
+	  -L	listen for multiple incoming connections (server mode).
+
+	  Any additional command line arguments after -l or -L are executed
+	  to handle each incoming connection.  If none, the connection is
+	  forwarded to stdin/stdout.
+
+	  For a quick-and-dirty server, try something like:
+		netcat -s 127.0.0.1 -p 1234 -tL /bin/bash -l
+
+# toys/oneit.c
+config ONEIT
+	bool "oneit"
+	default y
+	help
+	  usage: oneit [-p] [-c /dev/tty0] command [...]
+
+	  A simple init program that runs a single supplied command line with a
+	  controlling tty (so CTRL-C can kill it).
+
+	  -p	Power off instead of rebooting when command exits.
+	  -c	Which console device to use.
+
+	  The oneit command runs the supplied command line as a child process
+	  (because PID 1 has signals blocked), attached to /dev/tty0, in its
+	  own session.  Then oneit reaps zombies until the child exits, at
+	  which point it reboots (or with -p, powers off) the system.
+
+# toys/patch.c
+config PATCH
+	bool "patch"
+	default y
+	help
+	  usage: patch [-i file] [-p depth] [-Ru]
+
+	  Apply a unified diff to one or more files.
+
+	  -i	Input file (defaults=stdin)
+	  -p	number of '/' to strip from start of file paths (default=all)
+	  -R	Reverse patch.
+	  -u	Ignored (only handles "unified" diffs)
+
+	  This version of patch only handles unified diffs, and only modifies
+	  a file when all all hunks to that file apply.  Patch prints failed
+	  hunks to stderr, and exits with nonzero status if any hunks fail.
+
+	  A file compared against /dev/null (or with a date <= the epoch) is
+	  created/deleted as appropriate.
+
+# toys/pwd.c
+config PWD
+	bool "pwd"
+	default y
+	help
+	  usage: pwd
+
+	  The print working directory command prints the current directory.
+
+# toys/readlink.c
+config READLINK
+	bool "readlink"
+	default n
+	help
+	  usage: readlink
+
+	  Show what a symbolic link points to.
+
+config READLINK_F
+	bool "readlink -f"
+	default n
+	depends on READLINK
+	help
+	  usage: readlink [-f]
+
+	  -f	Show full cannonical path, with no symlinks in it.  Returns
+		nonzero if nothing could currently exist at this location.
+
+# toys/rmdir.c
+config RMDIR
+	bool "rmdir"
+	default y
+	help
+	  usage: rmdir [-p] [dirname...]
+	  Remove one or more directories.
+
+	  -p	Remove path.
+
+# toys/sed.c
+config SED
+	bool "sed"
+	default n
+	help
+	  usage: sed [-irn] {command | [-e command]...} [FILE...]
+
+	  Stream EDitor, transforms text by appling commands to each line
+	  of input.
+
+# toys/seq.c
+config SEQ
+	bool "seq"
+	default y
+	help
+	  usage: seq [first] [increment] last
+
+	  Count from first to last, by increment.  Omitted arguments default
+	  to 1.  Two arguments are used as first and last.  Arguments can be
+	  negative or floating point.
+
+# toys/sha1sum.c
+config SHA1SUM
+	bool "sha1sum"
+	default y
+	help
+	  usage: sha1sum [file...]
+
+	  Calculate sha1 hash of files (or stdin).
+
+# toys/sleep.c
+config SLEEP
+	bool "sleep"
+	default y
+	help
+	  usage: sleep SECONDS
+
+	  Wait a decimal integer number of seconds.
+
+# toys/sort.c
+config SORT
+    bool "sort"
+    default y
+    help
+      usage: sort [-run] [FILE...]
+
+      Sort all lines of text from input files (or stdin) to stdout.
+
+      -r    reverse
+      -u    unique lines only
+      -n    numeric order (instead of alphabetical)
+
+config SORT_BIG
+    bool "  all SuSv3 options (Support -ktcsbdfiozgM)"
+    default y
+    depends on SORT
+    help
+      usage: sort [-bcdfgiMsz] [-k#[,#[x]] [-t X]] [-o FILE]
+
+      -b    ignore leading blanks (or trailing blanks in second part of key)
+      -c    check whether input is sorted
+      -d    dictionary order (use alphanumeric and whitespace chars only)
+      -f    force uppercase (case insensitive sort)
+      -g    general numeric sort (double precision with nan and inf)
+      -i    ignore nonprinting characters
+      -M    month sort (jan, feb, etc).
+      -s    skip fallback sort (only sort with keys)
+      -z    zero (null) terminated input
+      -k    sort by "key" (see below)
+      -t    use a key separator other than whitespace
+      -o    output to FILE instead of stdout
+
+      This version of sort requires floating point.
+
+      Sorting by key looks at a subset of the words on each line.  -k2
+      uses the second word to the end of the line, -k2,2 looks at only
+      the second word, -k2,4 looks from the start of the second to the end
+      of the fourth word.  Specifying multiple keys uses the later keys as
+      tie breakers, in order.  A type specifier appended to a sort key
+          (such as -2,2n) applies only to sorting that key.
+
+# toys/sync.c
+config SYNC
+	bool "sync"
+	default y
+	help
+	  usage: sync
+
+	  Write pending cached data to disk (synchronize), blocking until done.
+
+# toys/tee.c
+config TEE
+    bool "tee"
+    default y
+    help
+      usage: tee [-ai] [file...]
+
+      Copy stdin to each listed file, and also to stdout.
+      Filename "-" is a synonym for stdout.
+
+      -a	append to files.
+      -i	ignore SIGINT.
+
+# toys/touch.c
+config TOUCH
+	bool "touch"
+	default y
+	help
+	  usage: touch [-acm] [-r FILE] [-t MMDDhhmm] [-l bytes] FILE...
+
+	  Change file timestamps, ensure file existance and change file length.
+
+	  -a	Only change the access time.
+	  -c	Do not create the file if it doesn't exist.
+	  -l	Length to truncate (or sparsely extend) file to.
+	  -m	Only change the modification time.
+	  -r	Reference file to take timestamps from.
+	  -t	Time to change {a,m}time to.
+
+# toys/toysh.c
+config TOYSH
+	bool "sh (toysh)"
+	default y
+	help
+	  usage: sh [-c command] [script]
+
+	  The toybox command shell.  Runs a shell script, or else reads input
+	  interactively and responds to it.
+
+	  -c	command line to execute
+
+config TOYSH_TTY
+	bool "Interactive shell (terminal control)"
+	default n
+	depends on TOYSH
+	help
+	  Add terminal control to toysh.  This is necessary for interactive use,
+	  so the shell isn't killed by CTRL-C.
+
+config TOYSH_PROFILE
+	bool "Profile support"
+	default n
+	depends on TOYSH_TTY
+	help
+	  Read /etc/profile and ~/.profile when running interactively.
+
+	  Also enables the built-in command "source".
+
+config TOYSH_JOBCTL
+	bool "Job Control (fg, bg, jobs)"
+	default n
+	depends on TOYSH_TTY
+	help
+	  Add job control to toysh.  This lets toysh handle CTRL-Z, and enables
+	  the built-in commands "fg", "bg", and "jobs".
+
+	  With pipe support, enable use of "&" to run background processes.
+
+config TOYSH_FLOWCTL
+	bool "Flow control (if, while, for, functions)"
+	default n
+	depends on TOYSH
+	help
+	  Add flow control to toysh.  This enables the if/then/else/fi,
+	  while/do/done, and for/do/done constructs.
+
+	  With pipe support, this enables the ability to define functions
+	  using the "function name" or "name()" syntax, plus curly brackets
+	  "{ }" to group commands.
+
+config TOYSH_QUOTES
+	bool "Smarter argument parsing (quotes)"
+	default n
+	depends on TOYSH
+	help
+	  Add support for parsing "" and '' style quotes to the toysh command
+	  parser, with lets arguments have spaces in them.
+
+config TOYSH_WILDCARDS
+	bool "Wildcards ( ?*{,} )"
+	default n
+	depends on TOYSH_QUOTES
+	help
+	  Expand wildcards in argument names, ala "ls -l *.t?z" and
+	  "rm subdir/{one,two,three}.txt".
+
+config TOYSH_PROCARGS
+	bool "Executable arguments ( `` and $() )"
+	default n
+	depends on TOYSH_QUOTES
+	help
+	  Add support for executing arguments contianing $() and ``, using
+	  the output of the command as the new argument value(s).
+
+	  (Bash calls this "command substitution".)
+
+config TOYSH_ENVVARS
+	bool "Environment variable support"
+	default n
+	depends on TOYSH_QUOTES
+	help
+	  Substitute environment variable values for $VARNAME or ${VARNAME},
+	  and enable the built-in command "export".
+
+config TOYSH_LOCALS
+	bool "Local variables"
+	default n
+	depends on TOYSH_ENVVARS
+	help
+	  Support for local variables, fancy prompts ($PS1), the "set" command,
+	  and $?.
+
+config TOYSH_ARRAYS
+	bool "Array variables"
+	default n
+	depends on TOYSH_LOCALS
+	help
+	  Support for ${blah[blah]} style array variables.
+
+config TOYSH_PIPES
+	bool "Pipes and redirects ( | > >> < << & && | || () ; )"
+	default n
+	depends on TOYSH
+	help
+	  Support multiple commands on the same command line.  This includes
+	  | pipes, > >> < redirects, << here documents, || && conditional
+	  execution, () subshells, ; sequential execution, and (with job
+	  control) & background processes.
+
+config TOYSH_BUILTINS
+	bool "Builtin commands"
+	default n
+	depends on TOYSH
+	help
+	  Adds the commands exec, fg, bg, help, jobs, pwd, export, source, set,
+	  unset, read, alias.
+
+config EXIT
+	bool
+	default n
+	depends on TOYSH
+	help
+	  usage: exit [status]
+
+	  Exit shell.  If no return value supplied on command line, use value
+	  of most recent command, or 0 if none.
+
+config CD
+	bool
+	default n
+	depends on TOYSH
+	help
+	  usage: cd [path]
+
+	  Change current directory.  With no arguments, go to $HOME.
+
+config CD_P
+	bool # "-P support for cd"
+	default n
+	depends on TOYSH
+	help
+	  usage: cd [-PL]
+
+	  -P    Physical path: resolve symlinks in path.
+	  -L    Cancel previous -P and restore default behavior.
+
+# toys/true.c
+config TRUE
+	bool "true"
+	default y
+	help
+	  Return zero.
+
+# toys/tty.c
+config TTY
+	bool "tty"
+	default y
+	help
+	  Print the filename of the terminal connected to standard input.
+
+	  -s	Don't print anything, only return an exit status.
+
+# toys/uname.c
+config UNAME
+	bool "uname"
+	default y
+	help
+	  usage: uname [-asnrvmpio]
+
+	  Print system information.
+
+	  -s	System name
+	  -n	Network (domain) name
+	  -r	Release number
+	  -v	Version (build date)
+	  -m	Machine (hardware) name
+	  -a	All of the above
+
+# toys/which.c
+config WHICH
+	bool "which"
+	default y
+	help
+	  usage: which [-a] filename ...
+
+	  Search $PATH for executable files matching filename(s).
+
+	  -a	Show all matches
+
+# toys/yes.c
+config YES
+	bool "yes"
+	default y
+	help
+	  usage: yes [args...]
+
+	  Repeatedly output line until killed.  If no args, output 'y'.
+

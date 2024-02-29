@@ -1,23 +1,35 @@
 ---
-Language: Cpp
-BasedOnStyle: Mozilla
-ColumnLimit: 116
-SpacesInParentheses: true
-AlwaysBreakAfterReturnType: None
-AlwaysBreakAfterDefinitionReturnType: None
-SpaceBeforeCpp11BracedList: true
-BreakBeforeBinaryOperators: All
-Cpp11BracedListStyle: true
-AllowShortBlocksOnASingleLine: Always
+Language:        Cpp
+AccessModifierOffset: -4
+AllowShortCaseLabelsOnASingleLine: false
 BreakBeforeBraces: Custom
-BraceWrapping:
-  AfterClass: true
-  AfterControlStatement: Never
-  AfterFunction: true
-  AfterStruct: true
-  AfterEnum: true
-  SplitEmptyFunction: false
-  SplitEmptyRecord: false
-  SplitEmptyNamespace: false
-PackConstructorInitializers: NextLine
+BraceWrapping: 
+  AfterClass:      false
+  AfterControlStatement: false
+  AfterEnum:       false
+  AfterFunction:       true
+  AfterNamespace:  false
+  AfterObjCDeclaration: false
+  AfterStruct:     false
+  AfterUnion:      false
+  BeforeCatch:     false
+  BeforeElse:      false
+  IndentBraces:    false
+ColumnLimit:     80
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+IncludeCategories:
+  - Regex:           '^"(llvm|llvm-c|clang|clang-c)/'
+    Priority:        2
+  - Regex:           '^(<|"(gtest|isl|json)/)'
+    Priority:        3
+  - Regex:           '.*'
+    Priority:        1
+IndentCaseLabels: true
+IndentWidth:     4
+ObjCBlockIndentWidth: 4
+PointerAlignment: Left
+Standard:        Cpp03
+TabWidth:        4
+UseTab:          Never
 ...

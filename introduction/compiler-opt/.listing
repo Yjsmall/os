@@ -1,0 +1,6 @@
+drwxr-xr-x    2 0        0            4096 Feb 29 01:21 .
+drwxr-xr-x    9 0        0            4096 Feb 29 01:21 ..
+-rw-r--r--    1 0        0             344 Feb 29 01:21 README.md
+-rw-r--r--    1 0        0             911 Feb 29 01:21 barriers.c
+-rw-r--r--    1 0        0             362 Feb 29 01:21 inline.c
+-rw-r--r--    1 0        0             553 Feb 29 01:21 pointers.c
