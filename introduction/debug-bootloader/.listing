@@ -1,0 +1,6 @@
+drwxr-xr-x    2 0        0            4096 Mar 04 14:08 .
+drwxr-xr-x   12 0        0            4096 Mar 04 14:08 ..
+-rw-r--r--    1 0        0             370 Mar 04 14:08 Makefile
+-rw-r--r--    1 0        0             985 Mar 04 14:08 README.md
+-rw-r--r--    1 0        0             487 Mar 04 14:08 debug.py
+-rw-r--r--    1 0        0              83 Mar 04 14:08 hello.c
