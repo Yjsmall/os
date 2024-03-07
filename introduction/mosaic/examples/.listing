@@ -1,0 +1,9 @@
+drwxr-xr-x    2 0        0            4096 Mar 06 14:29 .
+drwxr-xr-x    4 0        0            4096 Mar 06 14:29 ..
+-rw-r--r--    1 0        0             961 Mar 06 14:29 cond-var.py
+-rw-r--r--    1 0        0             156 Mar 06 14:29 fork-buf.py
+-rw-r--r--    1 0        0             709 Mar 06 14:29 fs-crash.py
+-rw-r--r--    1 0        0             170 Mar 06 14:29 hello.py
+-rw-r--r--    1 0        0             208 Mar 06 14:29 parallel-inc.py
+-rw-r--r--    1 0        0             822 Mar 06 14:29 tocttou.py
+-rw-r--r--    1 0        0             568 Mar 06 14:29 xv6-log.py

@@ -1,0 +1,6 @@
+drwxr-xr-x    2 0        0            4096 Mar 06 14:29 .
+drwxr-xr-x   14 0        0            4096 Mar 06 14:29 ..
+-rw-r--r--    1 0        0             385 Mar 06 14:29 README.md
+-rw-r--r--    1 0        0             124 Mar 06 14:29 hello.py
+-rwxr-xr-x    1 0        0            3026 Mar 06 14:29 os-model.py
+-rw-r--r--    1 0        0             135 Mar 06 14:29 proc.py
