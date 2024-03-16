@@ -1,0 +1,20 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+IndentWidth: 4
+UseTab: Never
+AlignAfterOpenBracket: AlwaysBreak
+ColumnLimit: 0
+AllowShortIfStatementsOnASingleLine: true
+PointerAlignment: Right
+#SkipMacroDefinitionBody: True
+SortIncludes: false
+ReflowComments: false
+# 连续赋值时，对齐所有等号
+AlignConsecutiveAssignments:	true
+# 连续声明时，对齐所有声明的变量名
+AlignConsecutiveDeclarations:	true
+# 允许短的块放在同一行
+AllowShortBlocksOnASingleLine:	false
+# 允许短的case标签放在同一行
+AllowShortCaseLabelsOnASingleLine:	false
