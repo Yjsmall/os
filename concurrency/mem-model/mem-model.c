@@ -1,11 +1,11 @@
 #include <thread.h>
 #include <stdatomic.h>
 
-int x = 0, y = 0;
+int        x = 0, y = 0;
 atomic_int flag;
 
-#define F1  1
-#define F2  2
+#define F1 1
+#define F2 2
 
 #define FLAG \
     atomic_load(&flag)
@@ -15,30 +15,26 @@ atomic_int flag;
     while (!(cond))    \
         ;
 
-__attribute__((noinline))
-void write_x_read_y() {
+__attribute__((noinline)) void write_x_read_y() {
     int y_val;
 
     asm volatile(
         "movl $1, %0;" // x = 1
         "movl %2, %1;" // y_val = y
         : "=m"(x), "=r"(y_val)
-        : "m"(y)
-    );
+        : "m"(y));
 
     printf("%d ", y_val);
 }
 
-__attribute__((noinline))
-void write_y_read_x() {
+__attribute__((noinline)) void write_y_read_x() {
     int x_val;
 
     asm volatile(
         "movl $1, %0;" // y = 1
         "movl %2, %1;" // x_val = x
         : "=m"(y), "=r"(x_val)
-        : "m"(x)
-    );
+        : "m"(x));
 
     printf("%d ", x_val);
 }

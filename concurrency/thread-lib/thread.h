@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <pthread.h>
 
-#define LENGTH(arr) (sizeof(arr) / sizeof(arr[0]))
+#define LENGTH(arr) (sizeof((arr)) / sizeof((arr)[0]))
 
 enum {
     T_FREE = 0, // This slot is not used yet.
