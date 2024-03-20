@@ -2,3 +2,7 @@
 **/*.dSYM
 .idea/
 .cache/
+.gdb*
+build/
+compile_commands.json
+

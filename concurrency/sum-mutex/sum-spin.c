@@ -1,8 +1,6 @@
 #include <thread.h>
 
-// We create 3 threads in this example.
-#define T        3
-#define N  1000000
+extern long sum, N;
 
 #define LOCKED   1
 #define UNLOCKED 0
@@ -43,34 +41,10 @@ void unlock() {
 }
 
 
-long volatile sum = 0;
-
-void T_sum(int tid) {
+void T_sum() {
     for (int i = 0; i < N; i++) {
         lock();
-
-        // This critical section is even longer; but
-        // it should be safe--the world is stopped.
-        // We also marked sum as volatile to make
-        // sure it is loaded and stored in each
-        // loop iteration.
-        for (int _ = 0; _ < 10; _++) {
-            sum++;
-        }
-
+        sum++;
         unlock();
     }
-
-    printf("Thread %d: sum = %ld\n", tid, sum);
-}
-
-int main() {
-    for (int i = 0; i < T; i++) {
-        create(T_sum);
-    }
-
-    join();
-
-    printf("sum  = %ld\n", sum);
-    printf("%d*n = %ld\n", T * 10, T * 10L * N);
 }
