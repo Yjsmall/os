@@ -1,6 +1,6 @@
 def main():
     x = 0
-    for _ in range(10):
+    for _ in range(2):
         # b = yield 0 or b = yield 1
         b = sys_read()
         x = x * 2 + b

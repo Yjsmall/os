@@ -94,5 +94,6 @@ if __name__ == '__main__':
         src = src.replace(f'sys_{syscall}',
                           f'yield "{syscall}", ')
 
+    print(f'{src}')
     stdout = OS(src).run()
     print(stdout)
