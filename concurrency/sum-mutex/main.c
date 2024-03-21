@@ -1,6 +1,6 @@
 #include <thread.h>
 
-long sum = 0, N = 10000000;
+long        sum = 0, N = 10000000;
 extern void T_sum();
 
 int main(int argc, char *argv[]) {

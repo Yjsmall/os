@@ -1,10 +1,10 @@
 #include <thread.h>
 
 // We create 3 threads in this example.
-#define T        3
-#define N  1000000
+#define T 3
+#define N 1000000
 
-#define LOCKED   1
+#define LOCKED 1
 #define UNLOCKED 0
 
 int status = UNLOCKED;
@@ -16,15 +16,14 @@ void lock() {
         // If the comparison succeeded, perform
         // an exchange.
         expected = UNLOCKED;
-        asm volatile (
+        asm volatile(
             "lock cmpxchgl %2, %1"
-            : "+a" (expected) // Value for comparison.
-                              // x86 uses eax/rax.
-            : "m" (status),   // Memory location.
-              "r" (LOCKED)    // Value to be written if
-                              // status == expected
-            : "memory", "cc"
-        );
+            : "+a"(expected) // Value for comparison.
+                             // x86 uses eax/rax.
+            : "m"(status),   // Memory location.
+              "r"(LOCKED)    // Value to be written if
+                             // status == expected
+            : "memory", "cc");
     } while (expected != UNLOCKED);
 }
 
@@ -39,9 +38,9 @@ void unlock() {
     // );
 
     // But actually we can do this:
+    asm("" ::: "memory");
     status = UNLOCKED;
 }
-
 
 long volatile sum = 0;
 

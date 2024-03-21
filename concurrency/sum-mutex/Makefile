@@ -1,3 +1,4 @@
+TLIB_PATH := ../thread-lib
 CFLAGS := -O2 -I$(TLIB_PATH)
 
 all: main.c sum-spin.c sum-mutex.c sum-atomic.c
