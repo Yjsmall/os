@@ -1,6 +1,5 @@
 all: memory stack
 
-TLIB_PATH := ../thread-lib
 CFLAGS := -O1 -g -I$(TLIB_PATH)
 
 memory: memory.c

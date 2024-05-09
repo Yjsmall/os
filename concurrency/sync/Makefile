@@ -1,6 +1,5 @@
 CFLAGS := -O2 -I$(TLIB_PATH)
 
-TLIB_PATH := ../thread-lib
 sync: sync.c piano_key_1.wav
 	gcc $(CFLAGS) -o $@ $<
 

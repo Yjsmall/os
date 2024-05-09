@@ -3,10 +3,16 @@
 
 #define LENGTH(arr) (sizeof(arr) / sizeof(arr[0]))
 
-enum { A = 1, B, C, D, E, F, };
+enum { A = 1,
+       B,
+       C,
+       D,
+       E,
+       F,
+};
 
 struct rule {
-  int from, ch, to;
+    int from, ch, to;
 } rules[] = {
     {A, '<', B},
     {B, '>', C},
@@ -20,13 +26,13 @@ struct rule {
 int current = A, quota = 1;
 
 mutex_t lk = MUTEX_INIT();
-cond_t cv = COND_INIT();
+cond_t  cv = COND_INIT();
 
 int next(char ch) {
     for (int i = 0; i < LENGTH(rules); i++) {
         struct rule *rule = &rules[i];
         if (rule->from == current && rule->ch == ch) {
-          return rule->to;
+            return rule->to;
         }
     }
     return 0;

@@ -7,7 +7,7 @@
 const int N = 7;
 
 struct Edge {
-    int from, to;
+    int     from, to;
     mutex_t mutex;
 } edges[] = {
     {1, 2, MUTEX_INIT()},

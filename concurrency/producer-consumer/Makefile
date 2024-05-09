@@ -1,6 +1,5 @@
 all: pc-1 pc-2 pc-cv pc-cv-broadcast
 
-TLIB_PATH := ../thread-lib
 CFLAGS := -O2 -I$(TLIB_PATH)
 
 pc-1: pc-1.c main.c
