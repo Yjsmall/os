@@ -15,11 +15,9 @@ skip function gettoken
 
 source visualize.py
 
-break main
 break runcmd
 
 run
-n
 define hook-stop
     pdump
 end
